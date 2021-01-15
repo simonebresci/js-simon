@@ -1,67 +1,45 @@
-*{
-  box-sizing: border-box;
-  padding:0;
-  margin: 0;
-}
-
-/* UTILITY DEBUGG */
-.debug-border{
-  border: 1px solid violet;
-}
-
-.red{
-  color:red;
+.disclaimer{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform:translate(-50%, 0);
+  font-size: 36px;
+  border: 2px solid red;
+  border-radius: 15px;
+  color: red;
+  padding: 15px;
   background-color: white;
 }
 
-.box-cookies{
-  height: 75px;
+.countdown-box{
+  display: none;
+  font-size: 36px;
+  color: orange;
+  /* border: 1px solid orange;
+  border-radius: 15px; */
+  padding: 15px;
+  margin-top: 30px;
+}
+.numbers{
+  display: none;
+  margin-top: 30px;
 }
 
-/* /UTILITY DEBUGG */
-
-/* UTILITIES */
-.bg-light-grey{
-  background-color: rgb(243,244,245);
-}
-/* /UTILITIES */
-
-.navbar-main .dropdown-box{
-  /* width: 800px; */
-  /* border: 1px solid blue; */
+#lista-numeri{
+  font-size: 36px;
+  color: blue;
+  border: 1px solid blue;
+  padding: 15px;
   border-radius: 15px;
 }
 
-.navbar-main .dropdown-box ul{
-  display: inline-block;
-  /* border: 1px solid red; */
-  padding: 15px;
+#punteggio, #numeri-indovinati{
+  font-size: 36px;
+  color: green;
 }
 
-.navbar-main .dropdown-box ul li{
-  display: block;
-  /* background-color: red; */
-}
-
-.navbar-main ul li{
-  position: relative;
-  display: inline-block;
-  line-height: 18px;
-  padding-right: 15px;
-
-}
-
-
-.navbar-main ul li.link{
-  font-weight: bold;
-  font-size: 16px;
-  /* background-color: yellow; */
-}
-
-
-.dropdown-box{
-  position: absolute;
-  top:18px;             /* Aggiungi line-height di <li> */
+.risultati{
   display: none;
-  border: 1px solid rgb(0,0,0,0.5);
+  border: 1px solid green;
+  border-radius: 15px;
 }

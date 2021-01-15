@@ -5,9 +5,14 @@
 // Una volta inseriti i 5 numeri, il software dice quanti e quali numeri sono stati ricordati.
 
 
+// Da implementare/migliorare
+// - Eliminare random duplicati
+// - Validazione input utente
+// - usare indexOf nella ricerca dei numeri indovinati perchè più semplice
+// - eliminare i console.log()
 
-// TODO: Eliminare random duplicati
 
+// FUNZIONI*********************************************************************
 function generateRandom(minR, maxR){
   return parseInt((Math.random() * (maxR - minR)) + minR) ;
 }
@@ -19,9 +24,6 @@ function generaArrayRandom(n, min, max){
 
     // todo: Genera random univoco
     tempRandom = generateRandom(min, max);
-    // do{
-    //   tempRandom = generateRandom(min, max);
-    // }while(arr.indexOf(tempRandom) <= 0)
 
     arr.push(tempRandom);
     // arr.push(Math.random * 100);  // Da 0 a 100
@@ -38,27 +40,53 @@ function printArray(arrayToPrint){
 
   return printString;
 }
-
+// FUNZIONI*********************************************************************
 
 
 
 $(document).ready(function(){
   // Inizializza variabili
-  var timeDisplayms = 5000; //Tempo di visualizzazione dei numeri
-  var arrayNumeriUtente = [];
-  var nRichiesteInput = 5;  //Numero di richieste di input all'utente
-  var arrayNumIndovinati = [];
-  var punteggio = 0;          //Equivale a numeri azzeccati
+  var timeDisplayms = 30000;    //Tempo di visualizzazione dei numeri
+  var arrayNumeriUtente = [];   //Array contenente i numeri inseriti dall'utente
+  var nRichiesteInput = 5;      //Quanti numeri deve inserire l'utente
+  var arrayNumIndovinati = [];  // Array dei numeri indovinati dall'utente
+  var punteggio = 0;            //Equivale a numeri azzeccati
+  var nMin = 1, nMax = 100;     //Limiti min e max dei numeri casuali
+
   // Genera 5 numeri casuali
-  var arrayRandom = generaArrayRandom(16,1,100); //Genera array di 16 numeri random compresi fra 1 e 100
+  var arrayRandom = generaArrayRandom(16,nMin,nMax); //Genera array di 16 numeri random compresi fra 1 e 100
+
+
 
   // Scrivi numeri su pagina html
   $('#lista-numeri').text(printArray(arrayRandom));
 
+  // Disclaimer
+  setTimeout(function(){
+    $('.disclaimer').fadeOut();
+  }, 1000);
+
+  // Mostra lista numeri casuali
+  setTimeout(function(){
+    $('.numbers').fadeIn();
+    $('.countdown-box').fadeIn();
+  }, 1000);
+
+  // Avvia countdown
+  var counterStart = timeDisplayms/1000;
+  var k = 0;
+  var counter = setInterval(function(){
+    k++;
+    $('#countdown').text(counterStart - k);
+  },1000);
+
   // Fai scomparire numeri dopo 30s
   setTimeout(function(){
     $('.numbers').fadeOut();
+    clearInterval(counter);
+    $('.countdown-box').fadeOut();
   },timeDisplayms);
+
 
   setTimeout(function(){
     // Chiedi ad utente di inserire numeri che ricorda
@@ -70,7 +98,6 @@ $(document).ready(function(){
     for (var z = 0; z < arrayRandom.length; z++) {
       for (var y = 0; y <arrayNumeriUtente.length; y++) {
         if(arrayNumeriUtente[y] === arrayRandom[z]){
-          alert('elemento trovato');
           arrayNumIndovinati.push(arrayRandom[z]);
           punteggio++;
         }
@@ -83,6 +110,11 @@ $(document).ready(function(){
     if(punteggio > 0){
       console.log('Numeri indovinati :' + printArray(arrayNumIndovinati ));
     }
+
+    // Stampa su pagina HTML
+    $('#punteggio').text('Punteggio:' + punteggio);
+    $('#numeri-indovinati').text('Numeri indovinati:' + printArray(arrayNumIndovinati ));
+    $('.risultati').fadeIn();
 
   },timeDisplayms + 1000);
 
